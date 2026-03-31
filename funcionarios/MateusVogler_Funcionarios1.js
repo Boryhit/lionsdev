@@ -36,12 +36,9 @@ function menu()
 console.log("\n==== MENU ====");
 console.log("===============");
 console.log("1 - Cadastrar Funcionário");
-console.log("2 - Editar Funcionário")
-console.log("3 - Pesquisar Por Nome");
-console.log("4 - Listar Todos os Funcionários");
-console.log("5 - Excluir Um Funcionário");
-console.log("6 - Funcionário Com Maior Salário");
-console.log("7 - Funcionário Com Menor Salário");
+console.log("2 - Listar Todos os Funcionários");
+console.log("3 - Funcionário Com Maior Salário");
+console.log("4 - Funcionário Com Menor Salário");
 console.log("0 - SAIR");
 console.log("===============");
 // O que vêm depois?
@@ -56,32 +53,17 @@ rl.question("Digite o opção desejada: ", (input) => {
             break;
         case 2:
             limparTexto();
-            console.log("Opção 2: Editar Funcionário");
-            editar();
+            console.log("Opção 2: Listar Funcionários");
+            listar();
             break;
         case 3:
             limparTexto();
-            console.log("Opção 3: Pesquisar por Nome");
-            pesquisar();
-            break;
-        case 4:
-            limparTexto();
-            console.log("Opção 4: Listar Funcionários");
-            listar();
-            break;
-        case 5: 
-            limparTexto();
-            console.log("Opção 5: Excluir Funcionário");
-            deletar();
-            break;
-        case 6:
-            limparTexto();
-            console.log("Opção 6: Maior Salário");
+            console.log("Opção 3: Maior Salário");
             maiorSalario();
             break
-        case 7:
+        case 4:
             limparTexto();
-            console.log("Opção 6: Menor Salário");
+            console.log("Opção 4: Menor Salário");
             menorSalario();
             break
         case 0:
@@ -119,41 +101,6 @@ function cadastrar () {
     });
 };
 
-function pesquisar() {
-    rl.question("Digite o nome do funcionário: ", (i) => {
-        limparTexto();
-        let buscar = cadastro.filter(function(element){
-            return element.nome === i;
-            });
-        if (buscar.length > 0){
-            console.table(buscar);
-            voltarMenu();
-        } else{
-            console.log("O funcionário não está cadastrado!");
-            voltarMenu();
-        };
-        
-    });
-};
-
-function editar() {
-    rl.question("Qual funcionário você deseja alterar?: ", (i) => {
-        rl.question("Digite o novo nome do funcionário: ", (i1) => {
-            limparTexto();
-            rl.question("Digite o novo cargo do funcionário: ", (i2) => {
-                limparTexto();
-                rl.question("Digite o novo salário do funcionário: ", (i3) => {
-                    limparTexto();
-                    cadastro[i].nome = i1;
-                    cadastro[i].cargo = i2;
-                    cadastro[i].salario = i3;
-                    voltarMenu();
-                });
-            });
-        });
-    });
-};
-
 function listar () {
     if (cadastro.length === 0){
         console.log("Ainda não existem funcionários cadastrados");
@@ -162,15 +109,6 @@ function listar () {
         console.table(cadastro);
         voltarMenu();
     };
-};
-
-function deletar() {
-    console.table(cadastro);
-    rl.question("Digite o indice do funcionário que deseja excluir: ", (i) =>{
-        cadastro.splice(i, 1);
-            console.log("Funcionário Deletado!");
-            voltarMenu();
-    });
 };
 
 function maiorSalario(){
